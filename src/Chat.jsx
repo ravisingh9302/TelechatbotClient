@@ -1,15 +1,20 @@
-import React, { useEffect, useState,useRef } from 'react'
+import React, { useEffect, useState, useRef } from 'react'
 import { io } from 'socket.io-client'
 import MessageArea from './MessageArea'
+
+// autoResponse: "Looking for the available customer executive."chatareabgcolor: "#E2E8F0"
+// visitorPronoun
+
 
 function Chat({ adminId, visitorId, host, config }) {
     const socketRef = useRef(null)
     const [message, setmessage] = useState([])
     const [input, setinput] = useState('')
-    console.log("adminID:", adminId, " visitorID:", visitorId, " HOST:", host, " CONFIG: ", config)
 
     let key = `host_${host}`
-    
+
+
+
 
 
     const writeMsgInlocal = (e) => {
@@ -20,7 +25,7 @@ function Chat({ adminId, visitorId, host, config }) {
             setmessage(a)
             localStorage.setItem(key, JSON.stringify(a))
         } catch (error) {
-            console.log('faild to add message in localStorage')
+            // console.log('faild to add message in localStorage')
         }
     }
 
@@ -36,7 +41,7 @@ function Chat({ adminId, visitorId, host, config }) {
     }
 
     const IncomingMessage = (msg) => {
-        console.log(" INcomming messages MESSAGE", msg)
+        // console.log(" INcomming messages MESSAGE", msg)
         writeMsgInlocal(msg)
     }
 
@@ -46,7 +51,7 @@ function Chat({ adminId, visitorId, host, config }) {
         }
         else {
             localStorage.setItem(key, JSON.stringify([]))
-            writeMsgInlocal({ text: config.introMessage, from: 'admin' })
+            writeMsgInlocal({ text: config?.introMessage, from: 'admin' })
         }
         return () => {
         };
@@ -56,49 +61,47 @@ function Chat({ adminId, visitorId, host, config }) {
 
     useEffect(() => {
         if (!socketRef.current) {
-          // Initialize the socket connection only if it doesn't already exist
+            // Initialize the socket connection only if it doesn't already exist
 
-          socketRef.current = io('http://localhost:8000/');
+            socketRef.current = io('https://telechatbotserver.onrender.com/');
 
-          socketRef.current.on('connect', () => {
-              console.log('Connected');
-              socketRef.current.emit('register', { adminId, visitorId })
-          });
-    
-          socketRef.current.on('disconnect', () => {
-            console.log('Disconnected');
-          });
+            socketRef.current.on('connect', () => {
+                socketRef.current.emit('register', { adminId, visitorId })
+            });
 
-          socketRef.current.on(visitorId,IncomingMessage)
-          socketRef.current.on(adminId,IncomingMessage)
+            socketRef.current.on('disconnect', () => {
+            });
+
+            socketRef.current.on(visitorId, IncomingMessage)
+            socketRef.current.on(adminId, IncomingMessage)
         }
-    
+
         // Cleanup function
         return () => {
-          if (socketRef.current) {
-            socketRef.current.off('connect');
-            socketRef.current.off('disconnect');
-            socketRef.current.disconnect();
-          }
+            if (socketRef.current) {
+                socketRef.current.off('connect');
+                socketRef.current.off('disconnect');
+                socketRef.current.disconnect();
+            }
         };
-      }, []);
+    }, []);
 
 
 
 
     return (
-        <div className=' flex flex-col   shadow-lg'>
 
-            <div className=' h-10 bg-blue-400 font-medium px-4 m-0'>
-                <p className=''>
-                    Customer Care Support!
+        <div className=' flex flex-col   shadow-lg'>
+            <div className='h-10 font-medium px-4 m-0' style={{backgroundColor:config?.titlebgcolor}}>
+                <p className='' style={{color:config?.titlecolor}}>
+                    {config.title ? config.title : 'Customer Care Support!'}
                 </p>
             </div>
 
             <MessageArea messages={message} config={config} />
 
             <div className=''>
-                <input className=" outline-none z-50 pl-1 text-black border-t-2 border-gray-200 bg-white h-9 w-full font-medium" type="text" placeholder="Type your message...." value={input} onChange={(e) => setinput(e.target?.value)} onKeyDown={handlesubmit} />
+                <input className=" outline-none z-50 pl-1 text-black border-t-2 border-gray-200 bg-white h-9 w-full font-medium" type="text" placeholder={config?.placeholderText?config.placeholderText:"Type your message..."} value={input} onChange={(e) => setinput(e.target?.value)} onKeyDown={handlesubmit} />
             </div>
         </div>
 
