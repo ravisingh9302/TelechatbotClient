@@ -1,0 +1,46 @@
+#root {
+  /* border: 2px solid green; */
+
+  /* max-width: 360px; */
+  /* max-height: 480px; */
+  /* border: 1px solid red; */
+  box-sizing: border-box;
+  /* margin: 0 auto; */
+  margin: 0;
+  /* padding: 0; */
+  /* outline: none; */
+  /* overflow: hidden; */
+  /* text-align: center; */
+  /* position: fixed; */
+  /* right: 10px; */
+  /* z-index: 10000; */
+  /* bottom: 10px; */
+}
+
+
+::-webkit-scrollbar {
+  width: 4px;
+  background: rgb(226, 232, 240);
+}
+
+::-webkit-scrollbar-thumb {
+  background: #d3d3d3;
+  border-radius: 100px;
+  /* border: solid 3px #e5e5e5; */
+  /* box-shadow: inset 0 0 3px #999; */
+}
+
+/* ::-webkit-scrollbar-thumb:hover {
+  background: #b0b0b0;
+  box-shadow: inset 0 0 3px #888;
+} */
+
+/* ::-webkit-scrollbar-thumb:active {
+  background: #aaa;
+  box-shadow: inset 0 0 3px #7f7f7f;
+} */
+
+/* ::-webkit-scrollbar-button {
+  display: block;
+  height: 24px;
+} */
