@@ -91,7 +91,7 @@ function Chat({ adminId, visitorId, host, config }) {
 
     return (
 
-        <div className=' flex flex-col  max-h-screen h-screen overflow-hidden'>
+        <div className=' flex flex-col  max-h-screen h-screen overflow-hidden bg-transparent'>
             <div className='h-10 min-h-10 max-h-10 font-medium px-4 m-0' style={{ backgroundColor: config?.titlebgcolor }}>
                 <p className='' style={{ color: config?.titlecolor }}>
                     {config.title ? config.title : 'Customer Care Support!'}
