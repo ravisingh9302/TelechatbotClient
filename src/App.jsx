@@ -29,7 +29,7 @@ function App() {
     getUrlParameter()
   }, [])
 
-
+console.log("configure,",config)
   return (
     <>
       {

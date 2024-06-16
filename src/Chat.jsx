@@ -101,7 +101,7 @@ function Chat({ adminId, visitorId, host, config }) {
             <MessageArea messages={message} config={config} />
 
             <div className='' >
-                <input id='inputtg' className={`outline-none z-50 px-1 ${config?.placeholderTxtcolor?`placeholder:text-[${config.placeholderTxtcolor}]`:'placeholder:text-gray-500'} mb-2 text-black bg-white h-9  min-h-10 max-h-20 w-full font-medium`} style={{ color: config?.inputTxtcolor ? config.inputTxtcolor : "#000000", backgroundColor: config?.inputBgcolor ? config.inputBgcolor : "#ffffff" }} type="text" placeholder={config?.placeholderText ? config.placeholderText : "Type your message..."} value={input} onChange={(e) => setinput(e.target?.value)} onKeyDown={handlesubmit} />
+                <input id='inputtg' className={`outline-none z-50 px-1 ${config?.placeholderTxtcolor?config.placeholderTxtcolor:'placeholder:text-gray-500'} mb-2  h-9  min-h-10 max-h-20 w-full font-medium`} style={{ color: config?.inputTxtcolor ? config.inputTxtcolor : "#000000", backgroundColor: config?.inputBgcolor ? config.inputBgcolor : "#ffffff" }} type="text" placeholder={config?.placeholderText ? config.placeholderText : "Type your message..."} value={input} onChange={(e) => setinput(e.target?.value)} onKeyDown={handlesubmit} />
             </div>
         </div>
 
