@@ -1,7 +1,7 @@
 import React, { useEffect, useState, useRef } from 'react'
 import { io } from 'socket.io-client'
 import MessageArea from './MessageArea'
-
+import './App.css'
 // autoResponse: "Looking for the available customer executive."chatareabgcolor: "#E2E8F0"
 // visitorPronoun
 
@@ -57,8 +57,8 @@ function Chat({ adminId, visitorId, host, config }) {
         };
     }, []);
 
-
-
+    
+    
     useEffect(() => {
         if (!socketRef.current) {
             // Initialize the socket connection only if it doesn't already exist
@@ -91,17 +91,17 @@ function Chat({ adminId, visitorId, host, config }) {
 
     return (
 
-        <div className=' flex flex-col   shadow-lg'>
-            <div className='h-10 font-medium px-4 m-0' style={{backgroundColor:config?.titlebgcolor}}>
-                <p className='' style={{color:config?.titlecolor}}>
+        <div className=' flex flex-col  max-h-screen h-screen overflow-hidden'>
+            <div className='h-10 min-h-10 max-h-10 font-medium px-4 m-0' style={{ backgroundColor: config?.titlebgcolor }}>
+                <p className='' style={{ color: config?.titlecolor }}>
                     {config.title ? config.title : 'Customer Care Support!'}
                 </p>
             </div>
 
             <MessageArea messages={message} config={config} />
 
-            <div className=''>
-                <input className=" outline-none z-50 pl-1 text-black border-t-2 border-gray-200 bg-white h-9 w-full font-medium" type="text" placeholder={config?.placeholderText?config.placeholderText:"Type your message..."} value={input} onChange={(e) => setinput(e.target?.value)} onKeyDown={handlesubmit} />
+            <div className='' >
+                <input id='inputtg' className={`outline-none z-50 px-1 ${config?.placeholderTxtcolor?`placeholder:text-[${config.placeholderTxtcolor}]`:'placeholder:text-gray-500'} mb-2 text-black bg-white h-9  min-h-10 max-h-20 w-full font-medium`} style={{ color: config?.inputTxtcolor ? config.inputTxtcolor : "#000000", backgroundColor: config?.inputBgcolor ? config.inputBgcolor : "#ffffff" }} type="text" placeholder={config?.placeholderText ? config.placeholderText : "Type your message..."} value={input} onChange={(e) => setinput(e.target?.value)} onKeyDown={handlesubmit} />
             </div>
         </div>
 

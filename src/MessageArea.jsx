@@ -15,7 +15,7 @@ function MessageArea({ messages, config }) {
     }, [messages]);
 
     return (
-        <div id='chatcont' className='chat pt-2 pb-1 px-2 h-[400px] bg-slate-200 flex flex-col gap-1 overflow-y-auto' style={{backgroundColor:config?.chatareabgcolor?config.chatareabgcolor:'#E2E8F0'}}>
+        <div id='chatcont' className='chat pt-2 pb-2 px-2 h-full  flex flex-col gap-1 overflow-y-auto' style={{backgroundColor:config?.chatareabgcolor?config.chatareabgcolor:'#E2E8F0'}}>
             {messages?.map((data, index) => {
                 if (data?.from === 'visitor') {
                     data.name = config?.visitorPronoun ? config?.visitorPronoun : 'You';
@@ -23,9 +23,9 @@ function MessageArea({ messages, config }) {
                 }
                 return (
                     <div key={index} className={`${data?.from === 'visitor' ? 'justify-end' : 'justify-start'}  flex text-black  `}>
-                        <div className={`bg-white shadow-sm rounded-md px-2 max-w-[80%] whitespace-normal`}>
-                            <p className=' text-left'>{data?.name ? data?.name + ': ' + data?.text : data?.text}</p>
-                            {config.displayMessageTime ? <div className={`flex justify-end text-gray-400 text-xs`}>{currentTime - new Date(data?.time) < dayInMillis ? dateFormat(data?.time, "HH:MM") : dateFormat(data?.time, "m/d/yy HH:MM")} </div> : ''}
+                        <div className={`bg-white shadow-sm rounded-md px-2 max-w-[80%] whitespace-normal`} style={{backgroundColor:config?.chatTextboxcolor?config.chatTextboxcolor:'#ffffff'}}>
+                            <p className=' text-left' style={{color:config?.chatTextcolor?config.chatTextcolor:'#000000'}}>{data?.name ? data?.name + ': ' + data?.text : data?.text}</p>
+                            {config.displayMessageTime ? <div className={`flex justify-end  text-xs`} style={{color:config?.chatTimecolor?config.chatTimecolor:'#808080'}}>{currentTime - new Date(data?.time) < dayInMillis ? dateFormat(data?.time, "HH:MM") : dateFormat(data?.time, "m/d/yy HH:MM")} </div> : ''}
                         </div>
                     </div>
                 );
